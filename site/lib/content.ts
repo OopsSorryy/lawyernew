@@ -23,6 +23,15 @@ interface Article {
   intro: string;
   paragraphs: string[];
 }
+interface Stat {
+  value: string;
+  label: string;
+}
+interface WhyColumn {
+  eyebrow: string;
+  title: string;
+  body: string;
+}
 interface SiteContent {
   meta: { title: string; description: string; skipLink: string };
   header: {
@@ -36,15 +45,19 @@ interface SiteContent {
   };
   hero: {
     ariaLabel: string;
-    eyebrow: string;
     heading: [string, string];
-    scrollCue: string;
-    note: string;
+    lead: string;
+    since: string;
+    primaryCta: string;
+    stats: Stat[];
   };
-  manifesto: {
+  about: {
     eyebrow: string;
     heading: [string, string];
     paragraphs: string[];
+    photoCaption: string;
+    ctaLabel: string;
+    taglineLines: [string, string];
   };
   expertise: {
     eyebrow: string;
@@ -65,6 +78,16 @@ interface SiteContent {
     cta: string;
     members: TeamMember[];
   };
+  whyChoose: {
+    eyebrow: string;
+    heading: [string, string];
+    columns: [WhyColumn, WhyColumn];
+    values: string[];
+  };
+  principles: {
+    eyebrow: string;
+    parts: { text: string; strong?: boolean }[];
+  };
   publications: {
     eyebrow: string;
     heading: string;
@@ -75,11 +98,31 @@ interface SiteContent {
   contact: {
     eyebrow: string;
     heading: [string, string];
-    linkText: string;
-    officeName: string;
-    officeTagline: string;
-    persons: { name: string; email: string; phone: string }[];
-    addressLines: [string, string];
+    lead: string;
+    form: {
+      name: string;
+      namePlaceholder: string;
+      email: string;
+      emailPlaceholder: string;
+      phone: string;
+      phonePlaceholder: string;
+      issue: string;
+      issuePlaceholder: string;
+      issueOther: string;
+      message: string;
+      messagePlaceholder: string;
+      submit: string;
+      note: string;
+    };
+    info: {
+      officeName: string;
+      officeTagline: string;
+      hoursLabel: string;
+      hours: string[];
+      persons: { name: string; email: string; phone: string }[];
+      officeLabel: string;
+      addressLines: [string, string];
+    };
   };
   footer: {
     homeAria: string;
@@ -100,30 +143,40 @@ export const content: Record<Lang, SiteContent> = {
     header: {
       homeAria: 'Aşkın Hukuk ana sayfa',
       nav: [
+        { label: 'Hakkımızda', id: 'hakkimizda' },
         { label: 'Çalışma Alanlarımız', id: 'uzmanlik' },
-        { label: 'Yaklaşımımız', id: 'yaklasim' },
         { label: 'Ekibimiz', id: 'ekip' },
         { label: 'Yayınlar', id: 'yayinlar' },
       ],
       menuOpen: 'Kapat −',
       menuClosed: 'Menü +',
       mainMenuAria: 'Ana menü',
-      contact: 'İletişim',
+      contact: 'Randevu Al',
       langLabel: 'Dil seçimi',
     },
     hero: {
       ariaLabel: 'Aşkın Hukuk Bürosu',
-      eyebrow: 'HUKUK · STRATEJİ · GÜVEN',
-      heading: ['Adalet tesadüfe', 'bırakılmaz.'],
-      scrollCue: 'Keşfetmek için kaydırın',
-      note: 'HER ŞEY BİR DURUŞLA BAŞLAR.',
+      heading: ['Karmaşık dünyada', 'netlikle adalet.'],
+      lead: 'Deneyim, sağduyu ve müvekkillerimize somut sonuçlar kazandırma taahhüdüyle hukuki zorlukları net stratejilere dönüştürüyoruz.',
+      since: 'Eskişehir merkezli hukuk bürosu.',
+      primaryCta: 'Hukuki Destek Alın',
+      stats: [
+        { value: '2', label: 'Kurucu Ortak Avukat' },
+        { value: '8', label: 'Uzmanlık Alanı' },
+      ],
     },
-    manifesto: {
-      eyebrow: '01 / AŞKIN HUKUK',
+    about: {
+      eyebrow: '01 / HAKKIMIZDA',
       heading: ['Bugünün hukuki kararları,', 'yarının sonuçlarını belirler.'],
       paragraphs: [
         'Av. Ömer Faruk Aşkın, Bursa ilinde doğmuş olup ilköğretimini burada tamamlamıştır. Lise eğitimini Bilecik Anadolu Lisesi’nde tamamladıktan sonra Kırıkkale Üniversitesi Hukuk Fakültesi’nde başladığı hukuk eğitimini başarıyla tamamlayarak 2023 yılında mezun olmuştur.',
         'Avukatlık stajını Eskişehir’de tamamlamıştır. Stajının ardından kurduğu hukuk bürosuyla 2024 yılından beri Eskişehir’de serbest avukatlık yapmaktadır.',
+      ],
+      photoCaption: 'AŞKIN / HUKUK BÜROSU',
+      ctaLabel: 'Hakkımda daha fazlası ↗',
+      taglineLines: [
+        'Bütünlük ve odaklanmayla güvenilir hukuki çözümler sunuyoruz.',
+        'Haklarınızı netlik ve özgüvenle korumaya adanmışız.',
       ],
     },
     expertise: {
@@ -237,8 +290,45 @@ export const content: Record<Lang, SiteContent> = {
         },
       ],
     },
+    whyChoose: {
+      eyebrow: '05 / NEDEN BİZ',
+      heading: ['Güvenilir bir', 'hukuki ortak.'],
+      columns: [
+        {
+          eyebrow: 'Deneyim',
+          title: 'Farklı hukuk alanlarında kanıtlanmış uzmanlık',
+          body: 'Miras, aile, ceza, gayrimenkul, ticaret ve idare hukuku başta olmak üzere sekiz farklı alanda; her dosyaya aynı titizlik ve stratejik bakışla yaklaşıyoruz.',
+        },
+        {
+          eyebrow: 'Bağlılık',
+          title: 'Menfaatlerinizi bütünlükle koruma taahhüdü',
+          body: 'Müvekkil güvenini ve şeffaflığı önceliklendiriyor; sürecin her adımında düzenli iletişim ve güvenilir bir yol göstericilik sunuyoruz.',
+        },
+      ],
+      values: [
+        'Şeffaflık',
+        'Gizlilik',
+        'Sonuç Odaklılık',
+        'Erişilebilirlik',
+        'Etik İlkeler',
+        'Güven',
+      ],
+    },
+    principles: {
+      eyebrow: 'İLKELERİMİZ',
+      parts: [
+        { text: 'Müvekkillerimiz bizi ' },
+        { text: 'güvenilir hukuki rehberlik ve tutarlı sonuçlar', strong: true },
+        { text: ' için tercih ediyor. Bireylerden kurumsal işletmelere kadar her müvekkilimizle ' },
+        {
+          text: 'şeffaflık, profesyonellik ve karmaşık hukuki meselelerde kanıtlanmış özen',
+          strong: true,
+        },
+        { text: ' üzerine kalıcı ilişkiler kuruyoruz.' },
+      ],
+    },
     publications: {
-      eyebrow: '05 / YAYINLAR',
+      eyebrow: '06 / YAYINLAR',
       heading: 'Hukuka dair.',
       intro: 'Hukuk dünyasına dair yazılar & bilgiler',
       note: 'Bu metin konsept site için hazırlanmış örnek yayın içeriğidir. Somut bir hukuki değerlendirme içermez.',
@@ -348,27 +438,51 @@ export const content: Record<Lang, SiteContent> = {
       ],
     },
     contact: {
-      eyebrow: '06 / İLETİŞİM',
+      eyebrow: '07 / İLETİŞİM',
       heading: ['Bir konuşmayla', 'başlayalım.'],
-      linkText: 'Hukuki sürecinizi birlikte değerlendirelim',
-      officeName: 'AŞKIN HUKUK BÜROSU',
-      officeTagline: 'Hukuki danışmanlık & temsil',
-      persons: [
-        {
-          name: 'Av. Ömer Faruk Aşkın',
-          email: 'omerfarukaskn@gmail.com',
-          phone: '0 546 622 98 45',
-        },
-        {
-          name: 'Av. Gülsüm Burcu Uğur',
-          email: 'avgulsumburcu@gmail.com',
-          phone: '0 536 270 01 50',
-        },
-      ],
-      addressLines: [
-        'Kurtuluş Mahallesi Cumhuriyet Bulvarı No:76/3',
-        'Odunpazarı / ESKİŞEHİR',
-      ],
+      lead: 'Hukuki sürecinizi birlikte değerlendirelim. Formu doldurun, size en kısa sürede dönüş yapalım.',
+      form: {
+        name: 'Ad Soyad',
+        namePlaceholder: 'Adınız soyadınız',
+        email: 'E-posta',
+        emailPlaceholder: 'E-posta adresiniz',
+        phone: 'Telefon Numarası',
+        phonePlaceholder: 'Telefon numaranız',
+        issue: 'Hukuki Konu Türü',
+        issuePlaceholder: 'Bir alan seçin',
+        issueOther: 'Diğer',
+        message: 'Mesaj',
+        messagePlaceholder: 'Mesajınızı yazın …',
+        submit: 'Danışmanlık Talep Et',
+        note: 'Formu gönderdiğinizde varsayılan e-posta uygulamanız üzerinden mesajınız büromuza iletilecektir.',
+      },
+      info: {
+        officeName: 'AŞKIN HUKUK BÜROSU',
+        officeTagline: 'Hukuki danışmanlık & temsil',
+        hoursLabel: 'Çalışma Saatleri',
+        hours: [
+          'Pazartesi – Cuma: 09:00 – 18:00',
+          'Cumartesi: Randevu ile',
+          'Pazar: Kapalı',
+        ],
+        persons: [
+          {
+            name: 'Av. Ömer Faruk Aşkın',
+            email: 'omerfarukaskn@gmail.com',
+            phone: '0 546 622 98 45',
+          },
+          {
+            name: 'Av. Gülsüm Burcu Uğur',
+            email: 'avgulsumburcu@gmail.com',
+            phone: '0 536 270 01 50',
+          },
+        ],
+        officeLabel: 'Ofis',
+        addressLines: [
+          'Kurtuluş Mahallesi Cumhuriyet Bulvarı No:76/3',
+          'Odunpazarı / ESKİŞEHİR',
+        ],
+      },
     },
     footer: {
       homeAria: 'Başa dön',
@@ -376,10 +490,11 @@ export const content: Record<Lang, SiteContent> = {
       nav: [
         { label: 'Hakkımızda', href: '#hakkimizda' },
         { label: 'Çalışma Alanlarımız', href: '#uzmanlik' },
+        { label: 'Ekibimiz', href: '#ekip' },
         { label: 'İletişim', href: '#iletisim' },
         { label: 'Başa dön ↑', href: '#' },
       ],
-      copyright: '© 2026 Aşkın Hukuk.',
+      copyright: '© 2026 Aşkın Hukuk. Tüm hakları saklıdır.',
       tagline: 'Hukuk · Strateji · Güven',
     },
     common: { close: 'Kapat ×' },
@@ -394,30 +509,40 @@ export const content: Record<Lang, SiteContent> = {
     header: {
       homeAria: 'Aşkın Law homepage',
       nav: [
+        { label: 'About', id: 'hakkimizda' },
         { label: 'Practice Areas', id: 'uzmanlik' },
-        { label: 'Our Approach', id: 'yaklasim' },
         { label: 'Our Team', id: 'ekip' },
         { label: 'Insights', id: 'yayinlar' },
       ],
       menuOpen: 'Close −',
       menuClosed: 'Menu +',
       mainMenuAria: 'Main menu',
-      contact: 'Contact',
+      contact: 'Book a Consultation',
       langLabel: 'Language selection',
     },
     hero: {
       ariaLabel: 'Aşkın Law Office',
-      eyebrow: 'LAW · STRATEGY · TRUST',
-      heading: ['Justice is never', 'left to chance.'],
-      scrollCue: 'Scroll to explore',
-      note: 'IT ALL STARTS WITH TAKING A STAND.',
+      heading: ['Clarity and justice', 'in a complex world.'],
+      lead: 'We turn legal challenges into clear strategies through experience, sound judgment, and a commitment to achieving real results for our clients.',
+      since: 'An Eskişehir-based law office.',
+      primaryCta: 'Get Legal Guidance',
+      stats: [
+        { value: '2', label: 'Founding Partners' },
+        { value: '8', label: 'Practice Areas' },
+      ],
     },
-    manifesto: {
-      eyebrow: '01 / AŞKIN LAW',
+    about: {
+      eyebrow: '01 / ABOUT US',
       heading: ['Today’s legal decisions', 'shape tomorrow’s outcomes.'],
       paragraphs: [
         'Att. Ömer Faruk Aşkın was born in Bursa, where he completed his primary education. After finishing high school at Bilecik Anadolu High School, he pursued his legal education at Kırıkkale University Faculty of Law, graduating successfully in 2023.',
         'He completed his legal internship in Eskişehir. Since founding his own law office following his internship, he has been practicing independently in Eskişehir since 2024.',
+      ],
+      photoCaption: 'AŞKIN / LAW OFFICE',
+      ctaLabel: 'More about me ↗',
+      taglineLines: [
+        'Delivering trusted legal solutions with integrity and focus.',
+        'Committed to protecting your rights with clarity and confidence.',
       ],
     },
     expertise: {
@@ -531,8 +656,45 @@ export const content: Record<Lang, SiteContent> = {
         },
       ],
     },
+    whyChoose: {
+      eyebrow: '05 / WHY CHOOSE US',
+      heading: ['A trusted', 'legal partner.'],
+      columns: [
+        {
+          eyebrow: 'Experience',
+          title: 'Proven expertise across distinct areas of law',
+          body: 'From inheritance and family law to criminal, real estate, commercial, and administrative law — eight fields, one consistent standard of care and strategic thinking.',
+        },
+        {
+          eyebrow: 'Commitment',
+          title: 'Dedicated to protecting your interests, in full',
+          body: 'We prioritize client trust and transparency, working closely with you and providing consistent communication and reliable guidance throughout the process.',
+        },
+      ],
+      values: [
+        'Transparency',
+        'Confidentiality',
+        'Results-Driven',
+        'Accessibility',
+        'Ethical Principles',
+        'Trust',
+      ],
+    },
+    principles: {
+      eyebrow: 'OUR PRINCIPLES',
+      parts: [
+        { text: 'Our clients choose us for ' },
+        { text: 'reliable legal guidance and consistent results', strong: true },
+        { text: '. From individuals to established businesses, we build lasting relationships through ' },
+        {
+          text: 'transparency, professionalism, and proven diligence in complex legal matters',
+          strong: true,
+        },
+        { text: '.' },
+      ],
+    },
     publications: {
-      eyebrow: '05 / INSIGHTS',
+      eyebrow: '06 / INSIGHTS',
       heading: 'On the law.',
       intro: 'Articles & insights from the world of law',
       note: 'This text is sample publication content prepared for a concept site. It does not constitute concrete legal advice.',
@@ -642,38 +804,63 @@ export const content: Record<Lang, SiteContent> = {
       ],
     },
     contact: {
-      eyebrow: '06 / CONTACT',
+      eyebrow: '07 / CONTACT',
       heading: ['Let’s start with', 'a conversation.'],
-      linkText: 'Let’s assess your legal matter together',
-      officeName: 'AŞKIN LAW OFFICE',
-      officeTagline: 'Legal counsel & representation',
-      persons: [
-        {
-          name: 'Att. Ömer Faruk Aşkın',
-          email: 'omerfarukaskn@gmail.com',
-          phone: '0 546 622 98 45',
-        },
-        {
-          name: 'Att. Gülsüm Burcu Uğur',
-          email: 'avgulsumburcu@gmail.com',
-          phone: '0 536 270 01 50',
-        },
-      ],
-      addressLines: [
-        'Kurtuluş Mahallesi Cumhuriyet Bulvarı No:76/3',
-        'Odunpazarı / Eskişehir, Türkiye',
-      ],
+      lead: 'Let’s assess your legal matter together. Fill in the form and we will get back to you shortly.',
+      form: {
+        name: 'Full Name',
+        namePlaceholder: 'Your full name',
+        email: 'Email',
+        emailPlaceholder: 'Your email address',
+        phone: 'Phone Number',
+        phonePlaceholder: 'Your phone number',
+        issue: 'Legal Issue Type',
+        issuePlaceholder: 'Select one',
+        issueOther: 'Other',
+        message: 'Message',
+        messagePlaceholder: 'Write your message …',
+        submit: 'Request Consultation',
+        note: 'Submitting the form will open your default email app with your message addressed to our office.',
+      },
+      info: {
+        officeName: 'AŞKIN LAW OFFICE',
+        officeTagline: 'Legal counsel & representation',
+        hoursLabel: 'Office Hours',
+        hours: [
+          'Monday – Friday: 9:00 AM – 6:00 PM',
+          'Saturday: By appointment',
+          'Sunday: Closed',
+        ],
+        persons: [
+          {
+            name: 'Att. Ömer Faruk Aşkın',
+            email: 'omerfarukaskn@gmail.com',
+            phone: '0 546 622 98 45',
+          },
+          {
+            name: 'Att. Gülsüm Burcu Uğur',
+            email: 'avgulsumburcu@gmail.com',
+            phone: '0 536 270 01 50',
+          },
+        ],
+        officeLabel: 'Office',
+        addressLines: [
+          'Kurtuluş Mahallesi Cumhuriyet Bulvarı No:76/3',
+          'Odunpazarı / Eskişehir, Türkiye',
+        ],
+      },
     },
     footer: {
       homeAria: 'Back to top',
       logoAlt: 'Attorney Ömer Faruk Aşkın',
       nav: [
-        { label: 'About Us', href: '#hakkimizda' },
+        { label: 'About', href: '#hakkimizda' },
         { label: 'Practice Areas', href: '#uzmanlik' },
+        { label: 'Our Team', href: '#ekip' },
         { label: 'Contact', href: '#iletisim' },
         { label: 'Back to top ↑', href: '#' },
       ],
-      copyright: '© 2026 Aşkın Law.',
+      copyright: '© 2026 Aşkın Law. All rights reserved.',
       tagline: 'Law · Strategy · Trust',
     },
     common: { close: 'Close ×' },

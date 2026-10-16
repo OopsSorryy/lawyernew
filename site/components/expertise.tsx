@@ -1,4 +1,5 @@
 'use client';
+import { Building2, Home, Users } from 'lucide-react';
 import {
   Accordion,
   AccordionItem,
@@ -6,8 +7,14 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion';
 import { useContent } from '@/lib/i18n';
+const FEATURED_ICONS = [Building2, Home, Users];
 export default function Expertise() {
   const t = useContent();
+  const featured = [
+    t.expertise.areas[6],
+    t.expertise.areas[3],
+    t.expertise.areas[5],
+  ];
   return (
     <section className="expertise section-pad" id="uzmanlik">
       <div className="section-head reveal">
@@ -21,7 +28,21 @@ export default function Expertise() {
         </div>
         <p>{t.expertise.intro}</p>
       </div>
-      <Accordion className="expertise-list" multiple>
+      <div className="expertise-featured reveal">
+        {featured.map(({ title, description }, i) => {
+          const Icon = FEATURED_ICONS[i];
+          return (
+            <div className="expertise-card" key={title}>
+              <div className="expertise-card-glyph">
+                <Icon />
+              </div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+          );
+        })}
+      </div>
+      <Accordion className="expertise-list reveal" multiple>
         {t.expertise.areas.map(({ title, description }, i) => (
           <AccordionItem
             className="expertise-item"
