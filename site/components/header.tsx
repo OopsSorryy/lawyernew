@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { Scale } from 'lucide-react';
 import { useLanguage, useContent } from '@/lib/i18n';
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -12,23 +13,15 @@ export default function Header() {
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);
   }, []);
-  useEffect(() => {
-    const scroll = () => {
-      document.documentElement.classList.toggle(
-        'scrolled',
-        window.scrollY > 50,
-      );
-    };
-    window.addEventListener('scroll', scroll, { passive: true });
-    scroll();
-    return () => window.removeEventListener('scroll', scroll);
-  }, []);
   return (
     <div className="header-wrap">
       <header className="site-header">
         <a href="#" className="brand" aria-label={t.header.homeAria}>
-          <span>AŞKIN</span>
-          <em>HUKUK BÜROSU</em>
+          <Scale className="brand-mark" aria-hidden="true" />
+          <span>
+            AŞKIN
+            <em>HUKUK BÜROSU</em>
+          </span>
         </a>
         <button
           className="menu-toggle"
@@ -72,11 +65,11 @@ export default function Header() {
             </button>
           </div>
           <a
-            className="nav-contact"
+            className="btn-outline on-dark nav-contact"
             href="#iletisim"
             onClick={() => setOpen(false)}
           >
-            {t.header.contact} <span aria-hidden="true">→</span>
+            {t.header.contact}
           </a>
         </nav>
       </header>

@@ -23,14 +23,13 @@ interface Article {
   intro: string;
   paragraphs: string[];
 }
-interface Stat {
-  value: string;
-  label: string;
-}
-interface WhyColumn {
-  eyebrow: string;
+interface FeatureItem {
   title: string;
   body: string;
+}
+interface FooterLink {
+  label: string;
+  href: string;
 }
 interface SiteContent {
   meta: { title: string; description: string; skipLink: string };
@@ -47,23 +46,29 @@ interface SiteContent {
     ariaLabel: string;
     heading: [string, string];
     lead: string;
-    since: string;
     primaryCta: string;
-    stats: Stat[];
+    badgeTitle: string;
+    badgeSubtitle: string;
   };
   about: {
     eyebrow: string;
     heading: [string, string];
     paragraphs: string[];
     photoCaption: string;
+    checklist: [string, string, string, string];
     ctaLabel: string;
-    taglineLines: [string, string];
   };
   expertise: {
     eyebrow: string;
     heading: [string, string];
     intro: string;
     areas: Area[];
+    readMore: string;
+  };
+  ourExpertise: {
+    eyebrow: string;
+    heading: [string, string];
+    items: [FeatureItem, FeatureItem, FeatureItem];
   };
   approach: {
     eyebrow: string;
@@ -77,16 +82,6 @@ interface SiteContent {
     brandMark: string;
     cta: string;
     members: TeamMember[];
-  };
-  whyChoose: {
-    eyebrow: string;
-    heading: [string, string];
-    columns: [WhyColumn, WhyColumn];
-    values: string[];
-  };
-  principles: {
-    eyebrow: string;
-    parts: { text: string; strong?: boolean }[];
   };
   publications: {
     eyebrow: string;
@@ -127,9 +122,13 @@ interface SiteContent {
   footer: {
     homeAria: string;
     logoAlt: string;
-    nav: { label: string; href: string }[];
-    copyright: string;
     tagline: string;
+    servicesTitle: string;
+    services: FooterLink[];
+    quickLinksTitle: string;
+    quickLinks: FooterLink[];
+    findUsTitle: string;
+    copyright: string;
   };
   common: { close: string };
 }
@@ -156,34 +155,34 @@ export const content: Record<Lang, SiteContent> = {
     },
     hero: {
       ariaLabel: 'Aşkın Hukuk Bürosu',
-      heading: ['Karmaşık dünyada', 'netlikle adalet.'],
-      lead: 'Deneyim, sağduyu ve müvekkillerimize somut sonuçlar kazandırma taahhüdüyle hukuki zorlukları net stratejilere dönüştürüyoruz.',
-      since: 'Eskişehir merkezli hukuk bürosu.',
-      primaryCta: 'Hukuki Destek Alın',
-      stats: [
-        { value: '2', label: 'Kurucu Ortak Avukat' },
-        { value: '8', label: 'Uzmanlık Alanı' },
-      ],
+      heading: ['Adaletiniz İçin', 'Mücadele Ediyoruz'],
+      lead: 'Deneyimli avukat kadromuz, hedeflerinize ulaşmanız ve haklarınızı korumanız için kararlılıkla çalışıyor. Farklı hukuki meselelerde müvekkillerimizin yanında olarak adalete ulaşmalarını destekliyoruz.',
+      primaryCta: 'Ücretsiz Danışmanlık',
+      badgeTitle: '%100 Etik',
+      badgeSubtitle: 'Baro Kayıtlı',
     },
     about: {
-      eyebrow: '01 / HAKKIMIZDA',
-      heading: ['Bugünün hukuki kararları,', 'yarının sonuçlarını belirler.'],
+      eyebrow: 'MÜVEKKİLLERİMİZE DESTEK İÇİN HAZIRIZ',
+      heading: ['Size Uygun Nitelikli', 'Avukatlık Desteği'],
       paragraphs: [
-        'Av. Ömer Faruk Aşkın, Bursa ilinde doğmuş olup ilköğretimini burada tamamlamıştır. Lise eğitimini Bilecik Anadolu Lisesi’nde tamamladıktan sonra Kırıkkale Üniversitesi Hukuk Fakültesi’nde başladığı hukuk eğitimini başarıyla tamamlayarak 2023 yılında mezun olmuştur.',
-        'Avukatlık stajını Eskişehir’de tamamlamıştır. Stajının ardından kurduğu hukuk bürosuyla 2024 yılından beri Eskişehir’de serbest avukatlık yapmaktadır.',
+        'Aşkın Hukuk Bürosu ekibi, her müvekkiline güçlü ve kararlı bir tutumla yaklaşır. Davanızı kazanmanız için ekibimiz size en yüksek kalitede hizmeti sunar.',
+        'Av. Ömer Faruk Aşkın, Bursa ilinde doğmuş olup ilköğretimini burada tamamlamıştır. Kırıkkale Üniversitesi Hukuk Fakültesi’nde tamamladığı hukuk eğitiminin ardından 2024 yılından beri Eskişehir’de serbest avukatlık yapmaktadır.',
       ],
       photoCaption: 'AŞKIN / HUKUK BÜROSU',
-      ctaLabel: 'Hakkımda daha fazlası ↗',
-      taglineLines: [
-        'Bütünlük ve odaklanmayla güvenilir hukuki çözümler sunuyoruz.',
-        'Haklarınızı netlik ve özgüvenle korumaya adanmışız.',
+      checklist: [
+        'Şeffaf Süreç Takibi',
+        'Hızlı Geri Dönüş',
+        'Uzman Avukat Kadrosu',
+        'Sonuç Odaklı Çalışma',
       ],
+      ctaLabel: 'Devamını Oku',
     },
     expertise: {
-      eyebrow: '02 / ÇALIŞMA ALANLARIMIZ',
-      heading: ['Farklı meseleler.', 'Tek bir titizlik.'],
+      eyebrow: 'SİZE NASIL YARDIMCI OLABİLİRİZ',
+      heading: ['Hukuki Çalışma', 'Alanlarımız'],
       intro:
         'İhtiyacınızı anlıyor, her alanda aynı özeni ve stratejik bakışı sunuyoruz.',
+      readMore: 'Devamını Oku',
       areas: [
         {
           title: 'Miras Hukuku',
@@ -224,6 +223,24 @@ export const content: Record<Lang, SiteContent> = {
           title: 'İş Hukuku',
           description:
             'İşveren ve çalışan ilişkileri, iş sözleşmeleri ve iş uyuşmazlıklarında önleyici hukuki yaklaşım.',
+        },
+      ],
+    },
+    ourExpertise: {
+      eyebrow: 'UZMANLIĞIMIZ',
+      heading: ['Müvekkillerine Adanmış', 'Bir Hukuk Bürosu'],
+      items: [
+        {
+          title: 'Deneyim',
+          body: 'Ekibimiz, müvekkillerinin durumunu derinlemesine anlar ve sonuca ulaşana kadar yanlarında olur.',
+        },
+        {
+          title: 'Uzman Avukatlar',
+          body: 'Avukatlarımız yaratıcı ve donanımlıdır; bu da her dosyada kazanmaya yönelik çözümler bulmalarını sağlar.',
+        },
+        {
+          title: 'Hukuki Süreç',
+          body: 'Tüm hukuki belge ve evrakları titizlikle takip ederek sürecinizi hukuka uygun şekilde yönetiyoruz.',
         },
       ],
     },
@@ -288,43 +305,6 @@ export const content: Record<Lang, SiteContent> = {
             'İleri düzeyde İngilizce bilmekte olup, Almanca çalışmalarına devam etmektedir. Mesleki gelişim kapsamında; icra ve iflas hukuku, tüketici hukuku, kira hukuku, göç hukuku, iş hukuku uygulamaları, iş kazalarından doğan uyuşmazlıklar, tüketici temsil davaları, sosyal güvenlik hukuku, tapu iptal ve tescil davaları, etkili iletişim ve hukuk-bilişim alanlarında çeşitli eğitim ve sertifika programlarını tamamlamıştır.',
           ],
         },
-      ],
-    },
-    whyChoose: {
-      eyebrow: '05 / NEDEN BİZ',
-      heading: ['Güvenilir bir', 'hukuki ortak.'],
-      columns: [
-        {
-          eyebrow: 'Deneyim',
-          title: 'Farklı hukuk alanlarında kanıtlanmış uzmanlık',
-          body: 'Miras, aile, ceza, gayrimenkul, ticaret ve idare hukuku başta olmak üzere sekiz farklı alanda; her dosyaya aynı titizlik ve stratejik bakışla yaklaşıyoruz.',
-        },
-        {
-          eyebrow: 'Bağlılık',
-          title: 'Menfaatlerinizi bütünlükle koruma taahhüdü',
-          body: 'Müvekkil güvenini ve şeffaflığı önceliklendiriyor; sürecin her adımında düzenli iletişim ve güvenilir bir yol göstericilik sunuyoruz.',
-        },
-      ],
-      values: [
-        'Şeffaflık',
-        'Gizlilik',
-        'Sonuç Odaklılık',
-        'Erişilebilirlik',
-        'Etik İlkeler',
-        'Güven',
-      ],
-    },
-    principles: {
-      eyebrow: 'İLKELERİMİZ',
-      parts: [
-        { text: 'Müvekkillerimiz bizi ' },
-        { text: 'güvenilir hukuki rehberlik ve tutarlı sonuçlar', strong: true },
-        { text: ' için tercih ediyor. Bireylerden kurumsal işletmelere kadar her müvekkilimizle ' },
-        {
-          text: 'şeffaflık, profesyonellik ve karmaşık hukuki meselelerde kanıtlanmış özen',
-          strong: true,
-        },
-        { text: ' üzerine kalıcı ilişkiler kuruyoruz.' },
       ],
     },
     publications: {
@@ -486,16 +466,27 @@ export const content: Record<Lang, SiteContent> = {
     },
     footer: {
       homeAria: 'Başa dön',
-      logoAlt: 'Avukat Ömer Faruk Aşkın',
-      nav: [
-        { label: 'Hakkımızda', href: '#hakkimizda' },
-        { label: 'Çalışma Alanlarımız', href: '#uzmanlik' },
-        { label: 'Ekibimiz', href: '#ekip' },
-        { label: 'İletişim', href: '#iletisim' },
-        { label: 'Başa dön ↑', href: '#' },
+      logoAlt: 'Aşkın Hukuk Bürosu',
+      tagline:
+        'Avukatlarımız, en iyi ve en verimli hizmeti sunmak için her zaman buradadır.',
+      servicesTitle: 'Hizmetler',
+      services: [
+        { label: 'Aile Hukuku', href: '#uzmanlik' },
+        { label: 'Miras Hukuku', href: '#uzmanlik' },
+        { label: 'Gayrimenkul Hukuku', href: '#uzmanlik' },
+        { label: 'Ceza Hukuku', href: '#uzmanlik' },
+        { label: 'Ticaret Hukuku', href: '#uzmanlik' },
       ],
+      quickLinksTitle: 'Hızlı Linkler',
+      quickLinks: [
+        { label: 'Ana Sayfa', href: '#' },
+        { label: 'Hakkımızda', href: '#hakkimizda' },
+        { label: 'Ekibimiz', href: '#ekip' },
+        { label: 'Yayınlar', href: '#yayinlar' },
+        { label: 'İletişim', href: '#iletisim' },
+      ],
+      findUsTitle: 'Bize Ulaşın',
       copyright: '© 2026 Aşkın Hukuk. Tüm hakları saklıdır.',
-      tagline: 'Hukuk · Strateji · Güven',
     },
     common: { close: 'Kapat ×' },
   },
@@ -522,34 +513,34 @@ export const content: Record<Lang, SiteContent> = {
     },
     hero: {
       ariaLabel: 'Aşkın Law Office',
-      heading: ['Clarity and justice', 'in a complex world.'],
-      lead: 'We turn legal challenges into clear strategies through experience, sound judgment, and a commitment to achieving real results for our clients.',
-      since: 'An Eskişehir-based law office.',
-      primaryCta: 'Get Legal Guidance',
-      stats: [
-        { value: '2', label: 'Founding Partners' },
-        { value: '8', label: 'Practice Areas' },
-      ],
+      heading: ['Attorneys Fight For', 'Your Justice'],
+      lead: 'Our experienced team of attorneys works with determination to help you reach your goals and protect your rights. We support our clients across a wide range of legal matters to help them obtain justice.',
+      primaryCta: 'Free Consultation',
+      badgeTitle: '100% Ethical',
+      badgeSubtitle: 'Bar Registered',
     },
     about: {
-      eyebrow: '01 / ABOUT US',
-      heading: ['Today’s legal decisions', 'shape tomorrow’s outcomes.'],
+      eyebrow: 'READY TO SUPPORT OUR CLIENTS',
+      heading: ['We Provide Qualified', 'Attorneys For Your Assistance'],
       paragraphs: [
-        'Att. Ömer Faruk Aşkın was born in Bursa, where he completed his primary education. After finishing high school at Bilecik Anadolu High School, he pursued his legal education at Kırıkkale University Faculty of Law, graduating successfully in 2023.',
-        'He completed his legal internship in Eskişehir. Since founding his own law office following his internship, he has been practicing independently in Eskişehir since 2024.',
+        'The whole team at Aşkın Law Office brings a strong and determined attitude to every client they assist. Our team provides you with the highest quality service to help you succeed.',
+        'Att. Ömer Faruk Aşkın was born in Bursa, where he completed his primary education. After completing his legal education at Kırıkkale University Faculty of Law, he has been practicing independently in Eskişehir since 2024.',
       ],
       photoCaption: 'AŞKIN / LAW OFFICE',
-      ctaLabel: 'More about me ↗',
-      taglineLines: [
-        'Delivering trusted legal solutions with integrity and focus.',
-        'Committed to protecting your rights with clarity and confidence.',
+      checklist: [
+        'Transparent Process',
+        'Quick Response',
+        'Expert Attorney Team',
+        'Results-Driven Work',
       ],
+      ctaLabel: 'Learn More',
     },
     expertise: {
-      eyebrow: '02 / PRACTICE AREAS',
-      heading: ['Different matters.', 'One standard of care.'],
+      eyebrow: 'HOW CAN WE HELP YOU',
+      heading: ['Our Legal', 'Practice Areas'],
       intro:
         'We understand your needs and bring the same care and strategic perspective to every field.',
+      readMore: 'Read More',
       areas: [
         {
           title: 'Inheritance Law',
@@ -590,6 +581,24 @@ export const content: Record<Lang, SiteContent> = {
           title: 'Labor Law',
           description:
             'A preventive legal approach to employer-employee relations, employment contracts, and labor disputes.',
+        },
+      ],
+    },
+    ourExpertise: {
+      eyebrow: 'OUR EXPERTISE',
+      heading: ['A Law Firm Devoted', 'To Our Clients'],
+      items: [
+        {
+          title: 'Experience',
+          body: 'Our team understands each client’s situation deeply and stands by them until they achieve a favorable outcome.',
+        },
+        {
+          title: 'Expert Attorneys',
+          body: 'Our attorneys are creative and skilled, helping them find effective solutions to win every case.',
+        },
+        {
+          title: 'Legal Process',
+          body: 'We carefully maintain all legal documents and paperwork, guiding your case toward its destination the lawful way.',
         },
       ],
     },
@@ -654,43 +663,6 @@ export const content: Record<Lang, SiteContent> = {
             'She has an advanced level of English and continues to study German. As part of her professional development, she has completed various training and certificate programs in enforcement and bankruptcy law, consumer law, tenancy law, migration law, labor law practice, disputes arising from workplace accidents, consumer representation actions, social security law, title deed cancellation and registration actions, effective communication, and law and information technology.',
           ],
         },
-      ],
-    },
-    whyChoose: {
-      eyebrow: '05 / WHY CHOOSE US',
-      heading: ['A trusted', 'legal partner.'],
-      columns: [
-        {
-          eyebrow: 'Experience',
-          title: 'Proven expertise across distinct areas of law',
-          body: 'From inheritance and family law to criminal, real estate, commercial, and administrative law — eight fields, one consistent standard of care and strategic thinking.',
-        },
-        {
-          eyebrow: 'Commitment',
-          title: 'Dedicated to protecting your interests, in full',
-          body: 'We prioritize client trust and transparency, working closely with you and providing consistent communication and reliable guidance throughout the process.',
-        },
-      ],
-      values: [
-        'Transparency',
-        'Confidentiality',
-        'Results-Driven',
-        'Accessibility',
-        'Ethical Principles',
-        'Trust',
-      ],
-    },
-    principles: {
-      eyebrow: 'OUR PRINCIPLES',
-      parts: [
-        { text: 'Our clients choose us for ' },
-        { text: 'reliable legal guidance and consistent results', strong: true },
-        { text: '. From individuals to established businesses, we build lasting relationships through ' },
-        {
-          text: 'transparency, professionalism, and proven diligence in complex legal matters',
-          strong: true,
-        },
-        { text: '.' },
       ],
     },
     publications: {
@@ -852,16 +824,27 @@ export const content: Record<Lang, SiteContent> = {
     },
     footer: {
       homeAria: 'Back to top',
-      logoAlt: 'Attorney Ömer Faruk Aşkın',
-      nav: [
-        { label: 'About', href: '#hakkimizda' },
-        { label: 'Practice Areas', href: '#uzmanlik' },
-        { label: 'Our Team', href: '#ekip' },
-        { label: 'Contact', href: '#iletisim' },
-        { label: 'Back to top ↑', href: '#' },
+      logoAlt: 'Aşkın Law Office',
+      tagline:
+        'Our attorneys are always here to provide you the best and most efficient service.',
+      servicesTitle: 'Services',
+      services: [
+        { label: 'Family Law', href: '#uzmanlik' },
+        { label: 'Inheritance Law', href: '#uzmanlik' },
+        { label: 'Real Estate Law', href: '#uzmanlik' },
+        { label: 'Criminal Law', href: '#uzmanlik' },
+        { label: 'Commercial Law', href: '#uzmanlik' },
       ],
+      quickLinksTitle: 'Quick Links',
+      quickLinks: [
+        { label: 'Home', href: '#' },
+        { label: 'About Us', href: '#hakkimizda' },
+        { label: 'Our Team', href: '#ekip' },
+        { label: 'Insights', href: '#yayinlar' },
+        { label: 'Contact', href: '#iletisim' },
+      ],
+      findUsTitle: 'Find Us',
       copyright: '© 2026 Aşkın Law. All rights reserved.',
-      tagline: 'Law · Strategy · Trust',
     },
     common: { close: 'Close ×' },
   },

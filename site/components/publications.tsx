@@ -13,24 +13,21 @@ export default function Publications() {
   return (
     <section className="publications section-pad" id="yayinlar">
       <div className="section-head reveal">
-        <div>
-          <p className="eyebrow">{t.publications.eyebrow}</p>
-          <h2>
-            <em>{t.publications.heading}</em>
-          </h2>
-        </div>
-        <p>{t.publications.intro}</p>
+        <p className="eyebrow" style={{ justifyContent: 'center' }}>
+          {t.publications.eyebrow}
+        </p>
+        <h2>
+          <em>{t.publications.heading}</em>
+        </h2>
       </div>
-      <div className="publication-list">
-        {t.publications.articles.map((a, i) => (
+      <div className="publications-grid reveal">
+        {t.publications.articles.slice(0, 6).map((a, i) => (
           <Dialog key={i}>
-            <DialogTrigger className="publication-row">
+            <DialogTrigger className="publication-card">
               <span className="category">{a.category}</span>
               <h3>{a.title}</h3>
+              <p className="excerpt">{a.intro}</p>
               <span className="read-time">{a.time}</span>
-              <span className="arrow" aria-hidden="true">
-                ↗
-              </span>
             </DialogTrigger>
             <DialogContent className="article-dialog" showCloseButton={false}>
               <DialogClose

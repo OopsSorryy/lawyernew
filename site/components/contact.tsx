@@ -32,16 +32,19 @@ export default function Contact() {
   }
   return (
     <section className="contact section-pad" id="iletisim">
-      <div className="contact-head reveal">
-        <h2>
-          {t.contact.heading[0]} <em>{t.contact.heading[1]}</em>
-        </h2>
-        <p className="lead">{t.contact.lead}</p>
-      </div>
-      <div className="contact-media reveal">
-        <div className="contact-image" />
-        <div className="contact-shade" />
-        <form className="contact-form" onSubmit={handleSubmit}>
+      <div className="contact-image" />
+      <div className="contact-shade" />
+      <div className="contact-inner">
+        <div className="contact-head reveal">
+          <p className="eyebrow" style={{ justifyContent: 'center' }}>
+            {t.contact.eyebrow}
+          </p>
+          <h2>
+            {t.contact.heading[0]} <em>{t.contact.heading[1]}</em>
+          </h2>
+          <p style={{ marginTop: 16, color: '#b9b4ac' }}>{t.contact.lead}</p>
+        </div>
+        <form className="contact-form reveal" onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-field">
               <label htmlFor="name">{t.contact.form.name}</label>

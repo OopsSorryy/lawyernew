@@ -3,9 +3,9 @@ import Header from '@/components/header';
 import Hero from '@/components/hero';
 import About from '@/components/about';
 import Expertise from '@/components/expertise';
+import OurExpertise from '@/components/our-expertise';
+import ApproachShowcase from '@/components/approach-showcase';
 import Team from '@/components/team';
-import WhyChoose from '@/components/why-choose';
-import Principles from '@/components/principles';
 import Publications from '@/components/publications';
 import Contact from '@/components/contact';
 import ContactInfo from '@/components/contact-info';
@@ -21,24 +21,22 @@ export default function Home() {
         <Hero />
         <About />
         <Expertise />
+        <OurExpertise />
+        <ApproachShowcase />
         <section className="team section-pad" id="ekip">
           <div className="section-head reveal">
-            <div>
-              <p className="eyebrow">{t.team.eyebrow}</p>
-              <h2>
-                {t.team.heading[0]}
-                <br />
-                <em>{t.team.heading[1]}</em>
-              </h2>
-            </div>
+            <p className="eyebrow" style={{ justifyContent: 'center' }}>
+              {t.team.eyebrow}
+            </p>
+            <h2>
+              {t.team.heading[0]} <em>{t.team.heading[1]}</em>
+            </h2>
           </div>
           <Team />
         </section>
-        <WhyChoose />
-        <Principles />
-        <Publications />
-        <Contact />
         <ContactInfo />
+        <Contact />
+        <Publications />
       </main>
       <Footer />
       <Reveals />
